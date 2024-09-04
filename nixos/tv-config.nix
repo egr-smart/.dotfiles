@@ -35,6 +35,18 @@
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
+  i18n.inputMethod = {
+    enabled = "fcitx5";
+    fcitx5.addons = with pkgs; [
+      fcitx5-gtk
+      fcitx5-chinese-addons
+      fcitx5-configtool 
+    ];
+  };
+  
+  # ensure fcitx5 runs without DE
+  services.xserver.desktopManager.runXdgAutostartIfNone = true;
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.windowManager.i3.enable = true;
@@ -53,6 +65,7 @@
 
   # Enable sound.
   hardware.pulseaudio.enable = true;
+  #hardware.pulseaudio.extraConfig = "load-module module-switch-on-connect";
   # OR
   #services.pipewire = {
   #  enable = true;
